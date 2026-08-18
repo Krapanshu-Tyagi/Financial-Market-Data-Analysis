@@ -1,0 +1,5 @@
+Stock,Starting Price,Ending Price,Total Return (%),Average Daily Return (%),Annualized Volatility (%),Highest Price,Lowest Price,Best Day (%),Worst Day (%),Maximum Drawdown (%)
+AAPL,242.09,271.12,11.99,0.0661,32.46,285.41,171.37,15.33,-9.25,-30.22
+MSFT,413.67,481.48,16.39,0.0725,24.3,538.66,351.11,10.13,-6.18,-20.56
+GOOGL,188.45,312.59,65.88,0.2241,32.41,322.81,144.11,9.68,-7.29,-29.81
+AMZN,220.22,230.82,4.81,0.0422,34.49,254.0,167.32,11.98,-8.98,-30.88
