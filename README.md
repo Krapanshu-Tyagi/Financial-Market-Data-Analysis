@@ -1,81 +1,83 @@
 # Financial Market Data Analysis
 
-A Python-based financial data analysis project that uses real historical stock market data to compare the performance and risk of major technology companies.
+A reproducible Python pipeline for comparing historical stock performance and risk using adjusted market prices from Yahoo Finance via `yfinance`.
 
-## Objective
+## What it measures
 
-The goal of this project is to analyze historical stock data and compare:
+- **Total return:** change from the first to last adjusted close in the selected period.
+- **Daily returns:** percentage change between consecutive adjusted closes.
+- **Annualized volatility:** sample standard deviation of daily returns multiplied by `sqrt(252)`.
+- **Maximum drawdown:** largest peak-to-trough decline in the adjusted closing-price series.
+- **Moving averages:** 20- and 50-observation simple moving averages.
+- **Correlation:** Pearson correlation between aligned daily returns.
 
-- Stock returns
-- Daily returns
-- Annualized volatility
-- Maximum drawdown
-- Moving averages
-- Cumulative performance
-- Correlation between stocks
+These are historical descriptive statistics, not predictions or investment recommendations. The annualization assumes 252 trading sessions per year. Yahoo Finance data availability and adjustments may change over time.
 
-## Stocks Analyzed
+## Requirements
 
-- Apple (AAPL)
-- Microsoft (MSFT)
-- Alphabet (GOOGL)
-- Amazon (AMZN)
+- Python 3.10+
+- Dependencies in `requirements.txt`
 
-## Technologies Used
+## Setup
 
-- Python
-- Pandas
-- NumPy
-- yfinance
-- Matplotlib
-- OpenPyXL
-- Excel
+```bash
+python -m venv .venv
+```
 
-## Data Source
+Windows PowerShell:
 
-Historical stock market data was obtained using the Yahoo Finance API through the `yfinance` Python library.
+```powershell
+.venv\Scripts\Activate.ps1
+pip install -r requirements.txt
+```
 
-## Analysis
+macOS/Linux:
 
-The project calculates:
+```bash
+source .venv/bin/activate
+pip install -r requirements.txt
+```
 
-### Total Return
+## Run
 
-Measures the percentage change between the starting and ending stock prices.
+Default analysis (AAPL, MSFT, GOOGL, AMZN):
 
-### Daily Return
+```bash
+python stock_analysis.py
+```
 
-Measures the percentage change in price from one trading day to the next.
+Choose your own tickers, dates, and output directory:
 
-### Annualized Volatility
+```bash
+python stock_analysis.py --tickers AAPL,MSFT,NVDA --start 2024-01-01 --end 2025-01-01 --output-dir outputs
+```
 
-Measures the historical variability of daily stock returns.
-
-### Maximum Drawdown
-
-Measures the largest decline from a previous peak.
-
-### Correlation
-
-Measures how closely the daily returns of different stocks move together.
-
-## Output
-
-The project generates:
+The end date is exclusive, following the `yfinance` convention. Generated files are saved to the output directory:
 
 - `stock_summary.csv`
-- `daily_returns.csv`
 - `stock_prices.csv`
-- `stock_analysis.xlsx`
+- `daily_returns.csv`
+- `stock_analysis.xlsx` (summary, prices, returns, cumulative returns, and correlation sheets)
 - `stock_price_comparison.png`
 - `cumulative_returns.png`
 - `volatility_comparison.png`
 
-## How to Run
+## Tests
 
-Clone the repository and enter the project directory:
+The metric calculations are tested with deterministic local data; tests do not call Yahoo Finance.
 
 ```bash
-cd financial-data-project
+python -m pytest -q
 ```
 
+## Project structure
+
+```
+.
+├── market_analysis.py
+├── stock_analysis.py
+├── tests/
+│   └── test_market_analysis.py
+├── requirements.txt
+└── README.md
+```
